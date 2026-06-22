@@ -373,7 +373,7 @@ onclick="saveAppointment()">
 /* =============================
    CONFIG
 ============================= */
-const API_URL=
+const API_URL =
 "https://script.google.com/macros/s/AKfycbx6FF-Ssbm5JO4wLLbgwjwRCENrRbSEiv_iXj92_btfK_D4bBHgyL1fw9Z2cjd3yso/exec";
 
 async function callApi(action,data={}){
@@ -382,8 +382,9 @@ async function callApi(action,data={}){
     API_URL,
     {
       method:"POST",
+      redirect:"follow",
       headers:{
-        "Content-Type":"application/json"
+        "Content-Type":"text/plain;charset=utf-8"
       },
       body:JSON.stringify({
         action,
@@ -392,16 +393,11 @@ async function callApi(action,data={}){
     }
   );
 
-  if(!res.ok){
+  const text = await res.text();
 
-    throw new Error(
-      "Server Error : "+
-      res.status
-    );
+  console.log("response =",text);
 
-  }
-
-  return await res.json();
+  return JSON.parse(text);
 
 }
 
@@ -485,17 +481,17 @@ if(!SID){
     );
 
   }
-  catch(err){
+catch(err){
 
-    console.error(err);
+  console.error(err);
 
-    Swal.fire(
-      "Error",
-      "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์",
-      "error"
-    );
+  Swal.fire(
+    "Error",
+    err.message,
+    "error"
+  );
 
-  }
+}
 
   flatpickr(
     "#appointmentDate",
