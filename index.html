@@ -431,17 +431,18 @@ if(SID){
 
 window.onload = async function(){
 
-  if(!SID){
+const LOGIN_URL =
+"https://script.google.com/macros/s/AKfycbx6FF-Ssbm5JO4wLLbgwjwRCENrRbSEiv_iXj92_btfK_D4bBHgyL1fw9Z2cjd3yso/exec";
 
-    Swal.fire(
-      "Session Expired",
-      "กรุณาเข้าสู่ระบบใหม่",
-      "error"
-    );
+if(!SID){
 
-    return;
+  location.replace(
+    LOGIN_URL
+  );
 
-  }
+  return;
+
+}
 
   try{
 
