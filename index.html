@@ -543,10 +543,30 @@ catch(err){
 /* =============================
    PAGE CONTROL
 ============================= */
+let fp;
+
 function showPage(n){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.querySelector("#page"+n).classList.add("active");
+
+  document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+  document.querySelector("#page"+n)
+    .classList.add("active");
+
   currentPage = n;
+
+  if(n === 5 && !fp){
+
+    fp = flatpickr(
+      "#appointmentDate",
+      {
+        dateFormat:"Y-m-d",
+        minDate:"today"
+      }
+    );
+
+  }
+
   scroll(0,0);
 }
 
