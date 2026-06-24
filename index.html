@@ -311,7 +311,7 @@ h2, h3 { margin: 0 0 12px; color:#0f172a; }
 <input
 type="date"
 id="appointmentDate"
-class="input-box">
+class="form-control">
 
 <br>
 
@@ -551,23 +551,29 @@ function showPage(n){
   currentPage = n;
 
   // เมื่อเปิดหน้านัดหมาย
-  if(n === 5){
+if(n === 5){
 
-    const input =
-      document.getElementById(
-        "appointmentDate"
-      );
+  const input =
+    document.getElementById(
+      "appointmentDate"
+    );
 
-    if(input){
+  if(input){
 
-      input.min =
-        new Date()
-        .toISOString()
-        .split("T")[0];
+    const today =
+      new Date()
+      .toISOString()
+      .split("T")[0];
 
-    }
+    input.min = today;
+
+    input.value = today;
 
   }
+
+}
+
+  
 
   window.scrollTo({
     top:0,
