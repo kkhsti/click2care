@@ -536,7 +536,7 @@ catch(err){
 /* =============================
    PAGE CONTROL
 ============================= */
-
+let appointmentSaved = false;
 
 function showPage(n){
 
@@ -568,12 +568,22 @@ if(n === 5){
     input.min = today;
 
     input.value = today;
-
   }
-
 }
+if(n === 5){
 
-  
+  const btn =
+    document.getElementById(
+      "btnSaveAppointment"
+    );
+
+  if(appointmentSaved){
+
+    btn.disabled = true;
+    btn.innerHTML =
+      "✓ นัดหมายแล้ว";
+  }
+} 
 
   window.scrollTo({
     top:0,
@@ -1239,6 +1249,7 @@ async function saveAppointment(){
     }
 
     if(res.ok){
+      appointmentSaved = true;
     
       btn.disabled = true;
     
