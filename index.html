@@ -1239,22 +1239,28 @@ async function saveAppointment(){
     }
 
     if(res.ok){
-
+    
+      btn.disabled = true;
+    
+      btn.innerHTML =
+        "✓ นัดหมายแล้ว";
+    
       Swal.fire({
-
+    
         icon:"success",
-
+    
         title:"นัดหมายเรียบร้อย",
-
+    
         html:
           "เลขนัด : " +
           res.appointmentId +
-
           "<br>คิวที่ : " +
           res.queueNo
-
+    
       });
-
+    
+      return;
+    
     }
     else{
 
@@ -1291,9 +1297,13 @@ async function saveAppointment(){
 
   }
   finally{
-
-    btn.disabled = false;
-
+  
+    if(!btn.innerHTML.includes("นัดหมายแล้ว")){
+  
+      btn.disabled = false;
+  
+    }
+  
   }
 
 }
