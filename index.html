@@ -14,8 +14,8 @@ rel="stylesheet">
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- ปฏิทิน -->
-<!-- <link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> 
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -183,12 +183,7 @@ h2, h3 { margin: 0 0 12px; color:#0f172a; }
   font-size:16px;
 }
 
-  input[type="date"]{
-  min-height:50px !important;
-  pointer-events:auto !important;
-  position:relative;
-  z-index:9999;
-}
+
 </style>
 </head>
 <body>
@@ -312,9 +307,10 @@ h2, h3 { margin: 0 0 12px; color:#0f172a; }
 <label>วันที่เข้ารับบริการ</label>
 
 <input
-type="date"
+type="text"
 id="appointmentDate"
-class="input-box">
+class="input-box"
+placeholder="เลือกวันที่">
 
 <br>
 
@@ -490,15 +486,6 @@ catch(err){
   );
 
 }
-
-  flatpickr(
-    "#appointmentDate",
-    {
-      dateFormat:"Y-m-d",
-      minDate:"today"
-    }
-  );
-
 };
 
 // function sendResultToLine(resultText){
@@ -547,18 +534,51 @@ catch(err){
 /* =============================
    PAGE CONTROL
 ============================= */
-let fp;
+let appointmentCalendar = null;
 
 function showPage(n){
-  document.querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
 
-  document.querySelector("#page"+n)
+  document
+    .querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
+
+  document
+    .getElementById("page" + n)
     .classList.add("active");
 
   currentPage = n;
 
-  scroll(0,0);
+  // เมื่อเปิดหน้านัดหมาย
+  if(n === 5){
+
+    setTimeout(() => {
+
+      if(
+        typeof flatpickr === "function" &&
+        !appointmentCalendar
+      ){
+
+        appointmentCalendar =
+          flatpickr(
+            "#appointmentDate",
+            {
+              dateFormat: "Y-m-d",
+              minDate: "today",
+              disableMobile: true
+            }
+          );
+
+      }
+
+    }, 200);
+
+  }
+
+  window.scrollTo(
+    0,
+    0
+  );
+
 }
 
 function startSurvey(){ showPage(1); }
