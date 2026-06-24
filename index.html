@@ -14,8 +14,8 @@ rel="stylesheet">
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- ปฏิทิน -->
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> 
+<!-- <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">  -->
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -181,7 +181,9 @@ h2, h3 { margin: 0 0 12px; color:#0f172a; }
   border-radius:16px;
   background:white;
   font-size:16px;
+  min-height:52px;
 }
+
 
 
 </style>
@@ -307,10 +309,9 @@ h2, h3 { margin: 0 0 12px; color:#0f172a; }
 <label>วันที่เข้ารับบริการ</label>
 
 <input
-type="text"
+type="date"
 id="appointmentDate"
-class="input-box"
-placeholder="เลือกวันที่">
+class="input-box">
 
 <br>
 
@@ -486,6 +487,7 @@ catch(err){
   );
 
 }
+ 
 };
 
 // function sendResultToLine(resultText){
@@ -534,7 +536,7 @@ catch(err){
 /* =============================
    PAGE CONTROL
 ============================= */
-let appointmentCalendar = null;
+
 
 function showPage(n){
 
@@ -551,33 +553,26 @@ function showPage(n){
   // เมื่อเปิดหน้านัดหมาย
   if(n === 5){
 
-    setTimeout(() => {
+    const input =
+      document.getElementById(
+        "appointmentDate"
+      );
 
-      if(
-        typeof flatpickr === "function" &&
-        !appointmentCalendar
-      ){
+    if(input){
 
-        appointmentCalendar =
-          flatpickr(
-            "#appointmentDate",
-            {
-              dateFormat: "Y-m-d",
-              minDate: "today",
-              disableMobile: true
-            }
-          );
+      input.min =
+        new Date()
+        .toISOString()
+        .split("T")[0];
 
-      }
-
-    }, 200);
+    }
 
   }
 
-  window.scrollTo(
-    0,
-    0
-  );
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
