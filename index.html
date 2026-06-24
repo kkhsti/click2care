@@ -14,8 +14,8 @@ rel="stylesheet">
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- ปฏิทิน -->
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -306,11 +306,9 @@ h2, h3 { margin: 0 0 12px; color:#0f172a; }
 <label>วันที่เข้ารับบริการ</label>
 
 <input
-type="text"
+type="date"
 id="appointmentDate"
-class="input-box"
-placeholder="เลือกวันที่">
-
+class="input-box">
 
 <br>
 
@@ -546,7 +544,6 @@ catch(err){
 let fp;
 
 function showPage(n){
-
   document.querySelectorAll(".page")
     .forEach(p=>p.classList.remove("active"));
 
@@ -554,18 +551,6 @@ function showPage(n){
     .classList.add("active");
 
   currentPage = n;
-
-  if(n === 5 && !fp){
-
-    fp = flatpickr(
-      "#appointmentDate",
-      {
-        dateFormat:"Y-m-d",
-        minDate:"today"
-      }
-    );
-
-  }
 
   scroll(0,0);
 }
